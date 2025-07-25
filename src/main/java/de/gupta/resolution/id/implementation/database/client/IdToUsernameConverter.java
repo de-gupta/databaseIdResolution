@@ -3,7 +3,6 @@ package de.gupta.resolution.id.implementation.database.client;
 
 import de.gupta.resolution.id.api.IdentifierConverter;
 import de.gupta.resolution.id.implementation.database.configuration.DatabaseIDResolutionProperties;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.JdbcClient;
 
 import java.util.Optional;
@@ -19,8 +18,8 @@ final class IdToUsernameConverter implements IdentifierConverter<UUID, String>
 	{
 		return jdbcClient.sql(query)
 						 .param("id", uuid)
-				.query(String.class)
-				.optional();
+						 .query(String.class)
+						 .optional();
 	}
 
 	IdToUsernameConverter(final JdbcClient jdbcClient, final DatabaseIDResolutionProperties properties)

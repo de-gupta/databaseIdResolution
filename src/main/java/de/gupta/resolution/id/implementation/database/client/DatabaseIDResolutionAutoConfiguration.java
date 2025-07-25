@@ -5,7 +5,6 @@ import de.gupta.resolution.id.implementation.database.configuration.DatabaseIDRe
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.JdbcClient;
 
 import javax.sql.DataSource;

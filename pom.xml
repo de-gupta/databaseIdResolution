@@ -43,13 +43,8 @@
         <dependency>
             <groupId>io.github.de-gupta</groupId>
             <artifactId>id-resolution-api</artifactId>
-            <version>0.0.2</version>
+            <version>0.0.3</version>
         </dependency>
-
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-web</artifactId>-->
-<!--        </dependency>-->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>

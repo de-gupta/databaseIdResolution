@@ -4,24 +4,30 @@ package de.gupta.resolution.id.implementation.database.client;
 import de.gupta.resolution.id.api.IdentifierConverter;
 import de.gupta.resolution.id.implementation.database.configuration.DatabaseIDResolutionProperties;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.simple.JdbcClient;
 
+import java.util.Optional;
 import java.util.UUID;
 
 final class IdToUsernameConverter implements IdentifierConverter<UUID, String>
 {
-	private final JdbcTemplate jdbc;
+	private final JdbcClient jdbcClient;
 	private final String query;
 
 	@Override
-	public String convert(UUID uuid)
+	public Optional<String> convert(UUID uuid)
 	{
-		return jdbc.queryForObject(query, new Object[]{uuid}, String.class);
+		return jdbcClient.sql(query)
+						 .param("id", uuid)
+				.query(String.class)
+				.optional();
 	}
 
-	IdToUsernameConverter(final JdbcTemplate jdbc, final DatabaseIDResolutionProperties properties)
+	IdToUsernameConverter(final JdbcClient jdbcClient, final DatabaseIDResolutionProperties properties)
 	{
-		this.jdbc = jdbc;
-		this.query = String.format("SELECT %s FROM %s WHERE %s = ?",
+		this.jdbcClient = jdbcClient;
+		this.query = String.format(
+				"SELECT %s FROM %s WHERE %s = :id",
 				properties.getUsernameColumn(), properties.getTableName(), properties.getIdColumn());
 	}
 }
